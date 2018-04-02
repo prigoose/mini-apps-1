@@ -1,3 +1,5 @@
+var firstMove = 'X';
+var secondMove = 'O';
 var move = 1;
 var gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']]; // e = empty space
 
@@ -10,17 +12,17 @@ var makeMove = function(el) {
 	if (move % 2 !== 0) {
 		// Place X
 		var space = document.getElementById(id);
-		space.innerHTML += 'X';
+		space.innerHTML += firstMove;
 
 		// Keep track of game state
-		gameBoard[row][col] = 'X';
+		gameBoard[row][col] = firstMove;
 
 	} else {
 		var space = document.getElementById(id);
-		space.innerHTML += 'O'
+		space.innerHTML += secondMove
 
 		// Keep track of game state
-		gameBoard[row][col] = 'O';
+		gameBoard[row][col] = secondMove;
 	}
 
 	// CHECK RESULTS once each player has placed 3 pieces
@@ -28,13 +30,11 @@ var makeMove = function(el) {
 		// check rows for winner
 		for (var i=0; i < 3; i++) {
 			if (! gameBoard[i].includes('e')) {
-				if (! gameBoard[i].includes('X')) {
-					console.log('O wins on row ', i);
-					winnerIs('O');
+				if (! gameBoard[i].includes(firstMove)) {
+					winnerIs(secondMove);
 					return;
-				} else if (! gameBoard[i].includes('O')) {
-					console.log('X wins on row ', i);
-					winnerIs('X');
+				} else if (! gameBoard[i].includes(secondMove)) {
+					winnerIs(firstMove);
 					return;
 				}
 			}
@@ -43,13 +43,11 @@ var makeMove = function(el) {
 		// check columns for winner. 
 		for (var j=0; j < 3; j++) {
 			if (gameBoard[0][j] === gameBoard[1][j] && gameBoard[1][j] === gameBoard[2][j]) {
-				if (gameBoard[0][j] === 'X') {
-					console.log('X wins on col ', j);
-					winnerIs('X');
+				if (gameBoard[0][j] === firstMove) {
+					winnerIs(firstMove);
 					return;gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
-				} else if (gameBoard[0][j] === 'O') {
-					console.log('O wins on col ', j);
-					winnerIs('O');
+				} else if (gameBoard[0][j] === secondMove) {
+					winnerIs(secondMove);
 					return;
 				}
 			}
@@ -57,26 +55,22 @@ var makeMove = function(el) {
 
 		// check major diagonals for winner
 		if (gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) {
-			if (gameBoard[0][0] === 'X') {
-				console.log('X wins on diagonal');
-				winnerIs('X');
+			if (gameBoard[0][0] === firstMove) {
+				winnerIs(firstMove);
 				return;
-			} else if (gameBoard[0][0] === 'O') {
-				console.log('O wins on diagonal');
-				winnerIs('O');
+			} else if (gameBoard[0][0] === secondMove) {
+				winnerIs(secondMove);
 				return;
 			}
 		}
 
 		//check minor diagonals for winner
 		if (gameBoard[2][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[0][2]) {
-			if (gameBoard[1][1] === 'X') {
-				console.log('X wins on minor diagonal');
-				winnerIs('X');
+			if (gameBoard[1][1] === firstMove) {
+				winnerIs(firstMove);
 				return;
-			} else if (gameBoard[1][1] === 'O') {
-				console.log('O wins on minor diagonal');
-				winnerIs('O');
+			} else if (gameBoard[1][1] === secondMove) {
+				winnerIs(secondMove);
 				return;
 			}
 		}
@@ -90,10 +84,10 @@ var makeMove = function(el) {
 }
 
 var winnerIs = function(winner) {
-	document.body.innerHTML =`${winner} wins`
+	resetGame(winner);
 }
 
-var resetGame = function() {
+var resetGame = function(winner) {
 
 	// Clear the game board
 	elementList = document.querySelectorAll("th");
@@ -104,4 +98,14 @@ var resetGame = function() {
 	// Reset the game state
 	gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
 	move = 1;
+	if (winner === 'Nobody') {
+		// first move stays the same
+	} else if (winner === 'X') {
+		firstMove = 'X';
+		secondMove = 'O';
+	} else if (winner === 'O') {
+		firstMove = 'O';
+		secondMove = 'X';
+	} 
+	document.getElementById("whoGoesFirst").innerHTML = `Player ${firstMove} goes first`;
 }

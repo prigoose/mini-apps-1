@@ -82,6 +82,9 @@ var makeMove = function(el) {
 		}
 
 	}		
+	if (move === 9) {
+		winnerIs('Nobody');
+	}
 
 	move++;
 }

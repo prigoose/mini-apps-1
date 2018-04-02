@@ -1,44 +1,46 @@
-var firstMove = 'X';
-var secondMove = 'O';
-var move = 1;
-var gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']]; // e = empty space
-var xWins = 0;
-var oWins = 0;
-var p1Name = '';
-var p2Name = '';
+App = {
+	firstMove: 'X',
+	secondMove: 'O',
+	move: 1,
+	gameBoard: [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']], // e: empty space
+	xWins: 0,
+	oWins: 0,
+	p1Name: '',
+	p2Name: ''
+};
 
-var makeMove = function(el) {
+App.makeMove = function(el) {
 	// Setup work
 	var id = el.id;
 	var row = id.split('')[0];
 	var col = id.split('')[1];
 
-	if (move % 2 !== 0) {
+	if (App.move % 2 !== 0) {
 		// Place X
 		var space = document.getElementById(id);
-		space.innerHTML += firstMove;
+		space.innerHTML += App.firstMove;
 
 		// Keep track of game state
-		gameBoard[row][col] = firstMove;
+		App.gameBoard[row][col] = App.firstMove;
 
 	} else {
 		var space = document.getElementById(id);
-		space.innerHTML += secondMove
+		space.innerHTML += App.secondMove
 
 		// Keep track of game state
-		gameBoard[row][col] = secondMove;
+		App.gameBoard[row][col] = App.secondMove;
 	}
 
 	// CHECK RESULTS once each player has placed 3 pieces
-	if (move >= 5) {
+	if (App.move >= 5) {
 		// check rows for winner
 		for (var i=0; i < 3; i++) {
-			if (! gameBoard[i].includes('e')) {
-				if (! gameBoard[i].includes(firstMove)) {
-					winnerIs(secondMove);
+			if (! App.gameBoard[i].includes('e')) {
+				if (! App.gameBoard[i].includes(App.firstMove)) {
+					App.winnerIs(App.secondMove);
 					return;
-				} else if (! gameBoard[i].includes(secondMove)) {
-					winnerIs(firstMove);
+				} else if (! App.gameBoard[i].includes(App.secondMove)) {
+					App.winnerIs(App.firstMove);
 					return;
 				}
 			}
@@ -46,57 +48,57 @@ var makeMove = function(el) {
 
 		// check columns for winner. 
 		for (var j=0; j < 3; j++) {
-			if (gameBoard[0][j] === gameBoard[1][j] && gameBoard[1][j] === gameBoard[2][j]) {
-				if (gameBoard[0][j] === firstMove) {
-					winnerIs(firstMove);
-					return;gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
-				} else if (gameBoard[0][j] === secondMove) {
-					winnerIs(secondMove);
+			if (App.gameBoard[0][j] === App.gameBoard[1][j] && App.gameBoard[1][j] === App.gameBoard[2][j]) {
+				if (App.gameBoard[0][j] === App.firstMove) {
+					App.winnerIs(App.firstMove);
+					return;App.gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
+				} else if (App.gameBoard[0][j] === App.secondMove) {
+					App.winnerIs(App.secondMove);
 					return;
 				}
 			}
 		}
 
 		// check major diagonals for winner
-		if (gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) {
-			if (gameBoard[0][0] === firstMove) {
-				winnerIs(firstMove);
+		if (App.gameBoard[0][0] === App.gameBoard[1][1] && App.gameBoard[1][1] === App.gameBoard[2][2]) {
+			if (App.gameBoard[0][0] === App.firstMove) {
+				App.winnerIs(App.firstMove);
 				return;
-			} else if (gameBoard[0][0] === secondMove) {
-				winnerIs(secondMove);
+			} else if (App.gameBoard[0][0] === App.secondMove) {
+				App.winnerIs(App.secondMove);
 				return;
 			}
 		}
 
 		//check minor diagonals for winner
-		if (gameBoard[2][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[0][2]) {
-			if (gameBoard[1][1] === firstMove) {
-				winnerIs(firstMove);
+		if (App.gameBoard[2][0] === App.gameBoard[1][1] && App.gameBoard[1][1] === App.gameBoard[0][2]) {
+			if (App.gameBoard[1][1] === App.firstMove) {
+				App.winnerIs(App.firstMove);
 				return;
-			} else if (gameBoard[1][1] === secondMove) {
-				winnerIs(secondMove);
+			} else if (App.gameBoard[1][1] === App.secondMove) {
+				App.winnerIs(App.secondMove);
 				return;
 			}
 		}
 
 	}		
-	if (move === 9) {
-		winnerIs('Nobody');
+	if (App.move === 9) {
+		App.winnerIs('Nobody');
 	}
 
-	move++;
+	App.move++;
 }
 
-var winnerIs = function(winner) {
+App.winnerIs = function(winner) {
 	if (winner === 'X') {
-		xWins += 1;
+		App.xWins += 1;
 	} else if (winner === 'O') {
-		oWins += 1;
+		App.oWins += 1;
 	}
-	resetGame(winner);
+	App.resetGame(winner);
 }
 
-var resetGame = function(winner) {
+App.resetGame = function(winner) {
 
 	// Clear the game board
 	elementList = document.querySelectorAll("th");
@@ -105,29 +107,27 @@ var resetGame = function(winner) {
 	}
 
 	// Reset the game state
-	gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
-	move = 1;
+	App.gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
+	App.move = 1;
 
 	if (winner) { // if function was called due to a win
 		if (winner === 'Nobody') {
-			// first move stays the same
+			// first App.move stays the same
 		} else if (winner === 'X') {
-			firstMove = 'X';
-			secondMove = 'O';
+			App.firstMove = 'X';
+			App.secondMove = 'O';
 		} else if (winner === 'O') {
-			firstMove = 'O';
-			secondMove = 'X';
+			App.firstMove = 'O';
+			App.secondMove = 'X';
 		} 
-		document.getElementById("whoGoesFirst").innerHTML = `Player ${firstMove} goes first`;
-		document.getElementById("winTally").innerHTML = `${p1Name}: ${xWins} points. Player ${p2Name}: ${oWins} points`;
+		document.getElementById("whoGoesFirst").innerHTML = `${App.p1Name} goes first`;
+		document.getElementById("winTally").innerHTML = `${App.p1Name}: ${App.xWins} points. ${App.p2Name}: ${App.oWins} points`;
 	}
 }
 
-var setPlayerName = function(){
-	p1Name = document.getElementById("p1name").value;
-	p2Name = document.getElementById("p2name").value;
-	console.log('does this form action thingy work?')
-	document.getElementById("playerPiece").innerHTML = `${p1Name}: X, ${p2Name}: O`;
-	document.getElementById("whoGoesFirst").innerHTML = `${p1Name} goes first`;
-
+App.setPlayerName = function(){
+	App.p1Name = document.getElementById("p1name").value;
+	App.p2Name = document.getElementById("p2name").value;
+	document.getElementById("playerPiece").innerHTML = `${App.p1Name}: X, ${App.p2Name}: O`;
+	document.getElementById("whoGoesFirst").innerHTML = `${App.p1Name} goes first`;
 }

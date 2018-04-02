@@ -2,6 +2,8 @@ var firstMove = 'X';
 var secondMove = 'O';
 var move = 1;
 var gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']]; // e = empty space
+var xWins = 0;
+var oWins = 0;
 
 var makeMove = function(el) {
 	// Setup work
@@ -84,6 +86,11 @@ var makeMove = function(el) {
 }
 
 var winnerIs = function(winner) {
+	if (winner === 'X') {
+		xWins += 1;
+	} else if (winner === 'O') {
+		oWins += 1;
+	}
 	resetGame(winner);
 }
 
@@ -98,14 +105,18 @@ var resetGame = function(winner) {
 	// Reset the game state
 	gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
 	move = 1;
-	if (winner === 'Nobody') {
-		// first move stays the same
-	} else if (winner === 'X') {
-		firstMove = 'X';
-		secondMove = 'O';
-	} else if (winner === 'O') {
-		firstMove = 'O';
-		secondMove = 'X';
-	} 
-	document.getElementById("whoGoesFirst").innerHTML = `Player ${firstMove} goes first`;
+
+	if (winner) { // if function was called due to a win
+		if (winner === 'Nobody') {
+			// first move stays the same
+		} else if (winner === 'X') {
+			firstMove = 'X';
+			secondMove = 'O';
+		} else if (winner === 'O') {
+			firstMove = 'O';
+			secondMove = 'X';
+		} 
+		document.getElementById("whoGoesFirst").innerHTML = `Player ${firstMove} goes first`;
+		document.getElementById("winTally").innerHTML = `Player X: ${xWins} points. Player O: ${oWins} points`;
+	}
 }

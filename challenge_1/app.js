@@ -4,6 +4,8 @@ var move = 1;
 var gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']]; // e = empty space
 var xWins = 0;
 var oWins = 0;
+var p1Name = '';
+var p2Name = '';
 
 var makeMove = function(el) {
 	// Setup work
@@ -117,6 +119,15 @@ var resetGame = function(winner) {
 			secondMove = 'X';
 		} 
 		document.getElementById("whoGoesFirst").innerHTML = `Player ${firstMove} goes first`;
-		document.getElementById("winTally").innerHTML = `Player X: ${xWins} points. Player O: ${oWins} points`;
+		document.getElementById("winTally").innerHTML = `${p1Name}: ${xWins} points. Player ${p2Name}: ${oWins} points`;
 	}
+}
+
+var setPlayerName = function(){
+	p1Name = document.getElementById("p1name").value;
+	p2Name = document.getElementById("p2name").value;
+	console.log('does this form action thingy work?')
+	document.getElementById("playerPiece").innerHTML = `${p1Name}: X, ${p2Name}: O`;
+	document.getElementById("whoGoesFirst").innerHTML = `${p1Name} goes first`;
+
 }

@@ -6,6 +6,15 @@
 <body>
 	<span><font size="6">TIC TAC TOE INSANITY EDITION</font><span>
 	<button onClick="resetGame()">Reset Game</button>
+	<br>
+	<div>
+	  Player 1 Name:<br>
+	  <input type="text" id="p1name"><br>
+	  Player 2 Name:<br>
+	  <input type="text" id="p2name"><br><br>
+	  <button onClick="setPlayerName()">Submit</button>
+	</div>
+
 	<table style="width: 30%" border="10" cellspacing="50" cellpadding="50">
 		<tr>
 			<th id="00" onClick="makeMove(this)"></th>
@@ -22,7 +31,8 @@
 			<th id="21" onClick="makeMove(this)"></th>
 			<th id="22" onClick="makeMove(this)"></th>
 		</tr>
-		<p id="whoGoesFirst">Player X Goes First</p>
+		<p id="whoGoesFirst"></p>
+		<p id="playerPiece"></p>
 		<p id="winTally">THERE CAN ONLY BE ONE TIC TAC TOE CHAMPION.</p>
 </body>
 </html>

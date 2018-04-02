@@ -29,31 +29,54 @@ var makeMove = function(el) {
 		for (var i=0; i < 3; i++) {
 			if (! gameBoard[i].includes('e')) {
 				if (! gameBoard[i].includes('X')) {
-					console.log('O wins on row ', i)
+					console.log('O wins on row ', i);
+					return;
 				} else if (! gameBoard[i].includes('O')) {
-					console.log('X wins on row ', i)
+					console.log('X wins on row ', i);
+					return;
 				}
 			}
 		}
 
-		// check columns for winner
-		// for (var i=0; i < 3; i++) {
-		// 	if 
-		// }
+		// check columns for winner. 
+		for (var j=0; j < 3; j++) {
+			if (gameBoard[0][j] === gameBoard[1][j] && gameBoard[1][j] === gameBoard[2][j]) {
+				if (gameBoard[0][j] === 'X') {
+					console.log('X wins on col ', j);
+					return;
+				} else if (gameBoard[0][j] === 'O') {
+					console.log('O wins on col ', j);
+				}
+			}
+		}
 
-		// check diagonals for winner
+		// check major diagonals for winner
+		if (gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) {
+			if (gameBoard[0][0] === 'X') {
+				console.log('X wins on diagonal');
+				return;
+			} else if (gameBoard[0][0] === 'O') {
+				console.log('O wins on diagonal');
+				return;
+			}
+		}
 
+		//check minor diagonals for winner
+		if (gameBoard[2][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[0][2]) {
+			if (gameBoard[1][1] === 'X') {
+				console.log('X wins on minor diagonal');
+				return;
+			} else if (gameBoard[1][1] === 'O') {
+				console.log('O wins on minor diagonal');
+				return;
+			}
+		}
 
-	}
+	}		
 
 	move++;
 }
 
-
-		// for (var i=0; i < 3; i++) {
-		// 	if (! gameBoard[i].includes('e')) {
-		// 		if (! gameBoard[i].includes('X')) {
-		// 			console.log('O wins!')
-		// 		}
-		// 	}
-		// }
+var winnerIs = function(winner) {
+	document.body.innerHTML =${winner} wins`
+}

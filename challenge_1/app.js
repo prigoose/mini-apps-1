@@ -46,7 +46,7 @@ var makeMove = function(el) {
 				if (gameBoard[0][j] === 'X') {
 					console.log('X wins on col ', j);
 					winnerIs('X');
-					return;
+					return;gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
 				} else if (gameBoard[0][j] === 'O') {
 					console.log('O wins on col ', j);
 					winnerIs('O');
@@ -91,4 +91,17 @@ var makeMove = function(el) {
 
 var winnerIs = function(winner) {
 	document.body.innerHTML =`${winner} wins`
+}
+
+var resetGame = function() {
+
+	// Clear the game board
+	elementList = document.querySelectorAll("th");
+	for (var element=0; element < elementList.length; element++) {
+		elementList[element].innerHTML = '';
+	}
+
+	// Reset the game state
+	gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
+	move = 1;
 }

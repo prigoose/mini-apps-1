@@ -1,0 +1,19 @@
+// I HAVEN'T USED THIS PACKAGE.JSON FILE YET AND I'M NOT SURE IF SET UP RIGHT OR NECESSARY
+// WAS PLANNING TO USE IT TO INSTALL LIVE-SERVER 
+
+{
+  "name": "ticTacToe",
+  "description": "First Mini App",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "installLS": "npm install -g live-server",
+    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
+    "start": "live-server"
+  },
+  "dependencies": {
+    "live-server": "^1.2.0",
+  },
+  "devDependencies": {
+  }
+}

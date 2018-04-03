@@ -1,0 +1,15 @@
+{
+  "name": "csvConverter",
+  "version": "1.0.0",
+  "scripts": {
+    "installLive": "npm install -g live-server live-server",
+    "nodemon": "npm install -g nodemon@1.10.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "jquery": "^3.0.0",
+    "live-server": "^1.2.0",
+    "body-parser": "1.8",
+  },
+  "devDependencies": {}
+}

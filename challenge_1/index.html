@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles.css">
 <script src="./app.js"></script>
 </head>
 <body>
-	<span><font size="6">TIC TAC TOE INSANITY EDITION</font><span>
-	<button onClick="resetGame()">Reset Game</button>
-	<br>
-	<div>
-	  Player 1 Name:<br>
-	  <input type="text" id="p1name"><br>
-	  Player 2 Name:<br>
-	  <input type="text" id="p2name"><br><br>
+	<div class="header">
+		<h1>TIC TAC TOE INSANITY EDITION</h1>
+		<p id="winTally">THERE CAN ONLY BE ONE TIC TAC TOE CHAMPION.</p>
+		<p><button onClick="resetGame()">Reset Game</button></p>
+	</div>
+	<div class="names">
+	  Player 1 Name:
+	  <input type="text" id="p1name">&nbsp; &nbsp;
+	  Player 2 Name:
+	  <input type="text" id="p2name">&nbsp; &nbsp;
 	  <button onClick="View.setPlayerName()">Submit</button>
 	</div>
-
-	<table style="width: 30%" border="10" cellspacing="50" cellpadding="50">
+	<div class="playerStats">
+		<p><span id="whoGoesFirst"></span><br><span id="playerPiece"></span></p>
+	</div>
+	<div class="board">
+	<table align="center" style="width: 30%" cellspacing="2" cellpadding="40">
 		<tr>
 			<th id="00" onClick="makeMove(this)"></th>
 			<th id="01" onClick="makeMove(this)"></th>
@@ -31,9 +37,8 @@
 			<th id="21" onClick="makeMove(this)"></th>
 			<th id="22" onClick="makeMove(this)"></th>
 		</tr>
-		<p id="whoGoesFirst"></p>
-		<p id="playerPiece"></p>
-		<p id="winTally">THERE CAN ONLY BE ONE TIC TAC TOE CHAMPION.</p>
+	</table>
+	</div>
 </body>
 </html>
 

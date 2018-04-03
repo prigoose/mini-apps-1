@@ -1,7 +1,6 @@
 // CONTROLLER FUNCTIONS
 
 var makeMove = function(el) { 
-	GameState.move++;
 	// make move is a controller fxn. When the user clicks, makeMove runs and 
 	// in turn updates the model and the view
 
@@ -9,12 +8,17 @@ var makeMove = function(el) {
 	var id = el.id;
 	var row = id.split('')[0];
 	var col = id.split('')[1];
+	// console.log(document.getElementById(id).innerHTML.length);
+	if (document.getElementById(id).innerHTML === '') {
+		GameState.move++;
 
-	// Update view
-	View.showMove(id);
+		// Update view
+		View.showMove(id);
 
-	// Update model
-	GameState.updateBoard(row, col);
+		// Update model
+		GameState.updateBoard(row, col);
+	}
+	
 }
 
 resetGame = function(winner) {

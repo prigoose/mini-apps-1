@@ -1,0 +1,37 @@
+html, body {
+  background-color: black;
+	height: 100%;
+	color: white;
+  max-width: 1000px;
+  margin: auto;
+}
+
+table, th {
+   border: 10px solid white;
+}
+
+span {
+	font-size: 10px;
+}
+
+h1 {
+	font-size: 25px;
+}
+
+#winTally {
+	font-style: italic;
+	font-size: 15px;
+}
+
+.header, .names, .playerStats {
+	text-align: center;
+}
+
+.names {
+	padding-bottom: 10px;
+	color: white;
+}
+
+.playerState {
+	font-size: 11px;
+}

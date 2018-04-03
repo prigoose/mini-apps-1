@@ -31,7 +31,7 @@ resetGame = function(winner) {
 // GAME STATE CODE
 
 var GameState = { 
-	gameBoard: [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']], // e: empty space
+	gameBoard: [[null, null, null],[null, null, null],[null, null, null]], // e: empty space
 	move: 0,
 	winner: '',
 	xWins: 0, // should # of wins be on game state or presentation?
@@ -55,7 +55,7 @@ GameState.updateBoard = function(row, col) {
 GameState.checkResults = function() {
 	// check rows for winner
 		for (var i=0; i < 3; i++) {
-			if (! GameState.gameBoard[i].includes('e')) {
+			if (! GameState.gameBoard[i].includes(null)) {
 				if (! GameState.gameBoard[i].includes(View.firstMove)) {
 					GameState.winnerIs(View.secondMove);
 					return;
@@ -71,7 +71,7 @@ GameState.checkResults = function() {
 			if (GameState.gameBoard[0][j] === GameState.gameBoard[1][j] && GameState.gameBoard[1][j] === GameState.gameBoard[2][j]) {
 				if (GameState.gameBoard[0][j] === View.firstMove) {
 					GameState.winnerIs(View.firstMove);
-					return;GameState.gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
+					return;GameState.gameBoard = [[null, null, null],[null, null, null],[null, null, null]];
 				} else if (GameState.gameBoard[0][j] === View.secondMove) {
 					GameState.winnerIs(View.secondMove);
 					return;
@@ -121,7 +121,7 @@ GameState.winnerIs = function(winner) {
 
 GameState.reset = function() {
 // Reset the game state
-	GameState.gameBoard = [['e', 'e', 'e'],['e', 'e', 'e'],['e', 'e', 'e']];
+	GameState.gameBoard = [[null, null, null],[null, null, null],[null, null, null]];
 	GameState.move = 1;
 
 }

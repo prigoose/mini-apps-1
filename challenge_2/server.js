@@ -26,10 +26,48 @@ app.use(express.static('./client'))
 app.post('/csv', function(req, res) {
 	// console.log(req.body);
 	// console.log(typeof req.body);
-	fs.writeFile('results.csv', req.body.firstName, (err) => {
+	var keys = (Object.keys(req.body));
+	var childrenIndex = keys.indexOf('children');
+	keys.splice(childrenIndex, 1);
+	console.log(keys)
+	finalCSV = keys.join(',') + '\n'
+	var helper = function(object) {
+		var lineContent = [];
+		for (key in object) {
+			if (key !== 'children') {
+				lineContent.push(object[key]);
+			}
+		}
+		// lineContent.push(object.firstName, object.lastName, object.county, object.city, object.role, object.sales);
+		finalCSV += lineContent.join(',') + '\n'
+		for (var i=0; i < object.children.length; i++) {
+			helper(object.children[i])
+		}
+	}
+	helper(req.body);
+
+	// var finalCSV = fileContents.join(',');
+	fs.writeFile('results.csv', finalCSV, (err) => {
   		if (err) throw err;
   		console.log('The file has been saved!');
 	});
+
+	res.send('POST request worked')
 })
+
+// write app.get to return them a file
+app.get('/csv', function (req, res) {
+	var csvText = fs.readFile('results.csv', (err, data) => {
+		if (err) throw err;
+		console.log(data);
+		res.send(data);
+	})
+})
+
+
+	// fs.readFile('results.csv', (err, data) => {
+	//   if (err) {throw err};
+	//   res.send('GET request to the homepage')
+	// });
 
 app.listen(3000, () => console.log('App is running on http://localhost:3000'))

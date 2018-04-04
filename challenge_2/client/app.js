@@ -59,7 +59,18 @@ App.init = function() {
 			  method: "POST",
 			  contentType: 'application/json',
 			  data: JSON.stringify(exampleData),
-			  success: null, // can call 'get' to give back data
+			  success: function(data) {
+			  	$.ajax('/csv', {
+				  method: "GET",
+				  success: function(csvText) {
+				  	var lines = csvText.split('\n');
+				  	for (var i=0; i < lines.length; i++) {
+				  		$( "body" ).append( `<span>${lines[i]}</span><br>` );
+				  	}
+				  }, // append data to page
+				  error: null
+				});
+			  }, 
 			  error: null
 			});
 		})	

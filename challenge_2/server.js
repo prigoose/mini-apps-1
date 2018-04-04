@@ -24,7 +24,7 @@ app.use(express.static('./client'))
 
 // handle get requests when they send input into text field
 app.post('/csv', function(req, res) {
-	// console.log(req.body);
+	console.log('req body is: ', req.body);
 	// console.log(typeof req.body);
 	var keys = (Object.keys(req.body));
 	var childrenIndex = keys.indexOf('children');
